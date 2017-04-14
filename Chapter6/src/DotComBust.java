@@ -44,11 +44,11 @@ public class DotComBust {
             String userGuess = helper.getUserInput("Enter a guess");
             // call our own checkUserGuess method
             checkUserGuess(userGuess);
-        } // close while
+        }
 
         // call our own finishGame method
         finishGame();
-    } // close startPlaying method
+    }
 
     private void checkUserGuess (String userGuess) {
 
