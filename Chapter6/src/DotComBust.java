@@ -50,6 +50,48 @@ public class DotComBust {
         finishGame();
     } // close startPlaying method
 
+    private void checkUserGuess (String userGuess) {
 
+        // increment the number of guesses the user has made
+        numOfGuesses++;
+        // assume it's a 'miss', unless told otherwise
+        String result = "miss";
 
+        // repeat with all DotComs in the list
+        for (DotCom dotComToTest : dotComList) {
+            // ask the DotCom to check the user guess, looking for a hit (or kill)
+            result = dotComToTest.checkYourself(userGuess);
+            if (result.equals("hit")) {
+                // get out of the loop early, no point in testing the others
+                break;
+            }
+            if (result.equals("kill")) {
+                // this guy's dead, so take him out of the DotComs list then get out of the loop
+                dotComList.remove(dotComToTest);
+                break;
+            }
+        }
+        // print the result for the user
+        System.out.println(result);
+    }
+
+    private void finishGame() {
+        // print a message telling the user how de did in the game
+        System.out.println("All Dot Coms are dead! Your stock is now worthless.");
+        if (numOfGuesses <= 18) {
+            System.out.println("It only took you " + numOfGuesses + " guesses.");
+        } else {
+            System.out.println("Took you long enough. " + numOfGuesses + " guesses.");
+            System.out.println("Fish are dancing with your options.");
+        }
+    }
+
+    public static void main (String[] args) {
+        // create the game object
+        DotComBust game = new DotComBust();
+        // tell the game object to set up the game
+        game.setUpGame();
+        // tell the game object to start the main game play loop (keeps asking for user input and checking the guess
+        game.startPlaying();
+    }
 }
